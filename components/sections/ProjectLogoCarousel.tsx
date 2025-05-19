@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 
 interface ProjectLogoCarouselProps {
@@ -6,67 +6,11 @@ interface ProjectLogoCarouselProps {
 }
 
 export const ProjectLogoCarousel: React.FC<ProjectLogoCarouselProps> = ({ logos }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  // Auto-scroll effect
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-    let animationFrame: number;
-    let isHovered = false;
-
-    const scroll = () => {
-      if (!isHovered) {
-        scrollContainer.scrollLeft += 1;
-        // Loop
-        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-          scrollContainer.scrollLeft = 0;
-        }
-      }
-      animationFrame = requestAnimationFrame(scroll);
-    };
-    animationFrame = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationFrame);
-  }, []);
-
-  // Pause on hover
-  const handleMouseEnter = () => {
-    if (scrollRef.current) (scrollRef.current as any).isHovered = true;
-  };
-  const handleMouseLeave = () => {
-    if (scrollRef.current) (scrollRef.current as any).isHovered = false;
-  };
-
-  // Touch drag/swipe
-  let startX = 0;
-  let scrollLeft = 0;
-  const handleTouchStart = (e: React.TouchEvent) => {
-    startX = e.touches[0].pageX;
-    if (scrollRef.current) scrollLeft = scrollRef.current.scrollLeft;
-  };
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (scrollRef.current) {
-      const x = e.touches[0].pageX;
-      scrollRef.current.scrollLeft = scrollLeft - (x - startX);
-    }
-  };
-
-  // Duplicate logos for seamless looping
-  const displayLogos = [...logos, ...logos];
+  const displayLogos = [...logos, ...logos, ...logos];
 
   return (
-    <div
-      className="w-full flex justify-center items-center py-4 z-10 bg-gradient-to-r from-[#1e3a8a] via-[#6366f1] to-[#a21caf]"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div
-        ref={scrollRef}
-        className="flex gap-6 md:gap-10 overflow-x-auto px-0 md:px-4 scrollbar-hide"
-        style={{ scrollBehavior: "smooth", WebkitOverflowScrolling: "touch", maxWidth: '100vw' }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-      >
+    <div className="w-full overflow-hidden py-4 z-10 bg-gradient-to-r from-[#1e3a8a] via-[#6366f1] to-[#a21caf]">
+      <div className="flex gap-6 md:gap-10 carousel-track">
         {displayLogos.map((logo, idx) => (
           <div
             key={idx}
@@ -83,8 +27,24 @@ export const ProjectLogoCarousel: React.FC<ProjectLogoCarouselProps> = ({ logos 
         ))}
       </div>
       <style jsx global>{`
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .carousel-track {
+          display: flex;
+          animation: scroll 40s linear infinite;
+          width: fit-content;
+        }
+
+        .carousel-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-33.333%));
+          }
+        }
       `}</style>
     </div>
   );

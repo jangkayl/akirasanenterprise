@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 // Generate projects array with 53 items
-const projects = Array.from({ length: 53 }, (_, i) => ({
+const projects = Array.from({ length: 52 }, (_, i) => ({
   name: `Crypto Project ${i + 1}`,
   image: `/assets/project${(i) + 1}.jpeg`,
   description: [
