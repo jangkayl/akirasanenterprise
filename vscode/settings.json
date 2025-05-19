@@ -1,0 +1,47 @@
+{
+  "files.readonlyInclude": {
+    "**/.next/*/**": true,
+    "pnpm-lock.yaml": true,
+    "bun.lock": true
+  },
+  "files.watcherExclude": {
+    "**/.next/*/**": true,
+    "pnpm-lock.yaml": true,
+    "bun.lock": true
+  },
+  "search.exclude": {
+    "**/.next/**": true,
+    "pnpm-lock.yaml": true,
+    "bun.lock": true
+  },
+
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json, env.d.ts, next-env.d.ts",
+    "next.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig, .gitattributes, bun.lock"
+  },
+
+  // always choose typescript from node_modules
+  "typescript.tsdk": "./node_modules/typescript/lib",
+
+  // use LF line endings
+  "files.eol": "\n",
+
+  // more readable tabs
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx": "${dirname}/page.${extname}",
+    "**/app/**/layout.tsx": "${dirname}/layout.${extname}",
+    "**/app/**/route.ts": "${dirname}/route.${extname}",
+
+    "**/lib/**/*.ts": "${dirname}/${filename}.${extname}"
+  },
+
+  // smol performance improvements
+  "editor.minimap.renderCharacters": false,
+
+  // set prettier as default formatter for json, ts, tsx, js, jsx, html, css
+  "[json][jsonc][typescript][typescriptreact][javascript][javascriptreact][html][css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
