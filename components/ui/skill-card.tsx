@@ -15,7 +15,7 @@ export function SkillCard({ title, level, icon, className = "" }: SkillCardProps
       className={`group relative overflow-hidden rounded-xl border border-white/10 bg-black/50 p-6 backdrop-blur-sm ${className}`}
     >
       {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-purple-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-purple-500/10 opacity-0 transition-opacity duration-300 group-active:opacity-100 group-hover:opacity-100" />
 
       {/* Content */}
       <div className="relative z-10">

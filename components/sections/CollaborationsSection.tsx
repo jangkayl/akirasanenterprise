@@ -63,13 +63,16 @@ export function CollaborationsSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
               className="group relative overflow-hidden rounded-lg border border-purple-500/20 bg-card/50 backdrop-blur-sm hover:border-purple-500/40 transition-all"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               <div className="aspect-video relative min-h-[120px] sm:min-h-0">
                 <Image
                   src={collab.image}
                   alt={collab.name}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110 group-active:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">
@@ -77,7 +80,7 @@ export function CollaborationsSection() {
                   <p className="text-sm text-white/80">{collab.description}</p>
                 </div>
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity" />
             </motion.div>
           ))}
         </div>

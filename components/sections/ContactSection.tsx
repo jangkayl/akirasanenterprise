@@ -23,11 +23,11 @@ export function ContactSection() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center"
         >
-          <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-purple-500/20 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+          <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 md:p-12 border border-purple-500/20 mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
               Let's Connect
             </h2>
-            <p className="text-gray-300 mb-8 text-lg max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto">
               Join our Telegram channel for the latest updates, announcements, and exclusive content from Akirasan Enterprise
             </p>
             
@@ -37,49 +37,52 @@ export function ContactSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:from-purple-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 group"
+              className="inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm md:text-base font-medium hover:from-purple-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 group"
             >
-              <Send className="w-5 h-5" />
+              <Send className="w-4 h-4 md:w-5 md:h-5" />
               Join Telegram Channel
-              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </motion.a>
           </div>
 
           {/* Footer Section */}
-          <div className="mt-16 pt-8 border-t border-purple-500/20">
-            <div className="flex flex-col items-center gap-8">
+          <div className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-purple-500/20">
+            <div className="flex flex-col items-center gap-6 md:gap-8">
               {/* Brand Section */}
-              <div className="flex items-center gap-6">
-                <div className="relative w-16 h-16">
+              <div className="flex items-center gap-4 md:gap-6">
+                <div className="relative w-12 h-12 md:w-16 md:h-16">
                   <Image
                     src="/assets/logo.png"
                     alt="Akirasan Enterprise"
                     fill
+                    sizes="(max-width: 768px) 48px, 64px"
                     className="object-contain"
                     priority
                   />
                 </div>
-                <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400">
+                <h1 className="text-xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400">
                   Akirasan Enterprise
                 </h1>
               </div>
 
               {/* Partnership Logos */}
-              <div className="flex items-center gap-8">
-                <div className="relative w-20 h-20">
+              <div className="flex items-center gap-6 md:gap-8">
+                <div className="relative w-16 h-16 md:w-20 md:h-20">
                   <Image
                     src="/assets/partnership1.png"
                     alt="Partnership 1"
                     fill
+                    sizes="(max-width: 768px) 64px, 80px"
                     className="object-contain"
                     priority
                   />
                 </div>
-                <div className="relative w-20 h-20">
+                <div className="relative w-16 h-16 md:w-20 md:h-20">
                   <Image
                     src="/assets/partnership2.png"
                     alt="Partnership 2"
                     fill
+                    sizes="(max-width: 768px) 64px, 80px"
                     className="object-contain"
                     priority
                   />
@@ -87,7 +90,7 @@ export function ContactSection() {
               </div>
 
               {/* Copyright */}
-              <p className="text-gray-400 text-sm">
+              <p className="text-xs md:text-sm text-gray-400">
                 © {new Date().getFullYear()} Akirasan Enterprise. All rights reserved.
               </p>
             </div>

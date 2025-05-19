@@ -21,6 +21,7 @@ export const ProjectLogoCarousel: React.FC<ProjectLogoCarouselProps> = ({ logos 
               alt={logo.name}
               width={80}
               height={80}
+              sizes="(max-width: 768px) 64px, 96px"
               className="rounded-full object-cover"
             />
           </div>
