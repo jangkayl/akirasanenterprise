@@ -47,7 +47,8 @@ export function CollaborationsSection() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500"
         >
           Notable Collaborations
@@ -60,11 +61,9 @@ export function CollaborationsSection() {
               key={collab.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="group relative overflow-hidden rounded-lg border border-purple-500/20 bg-card/50 backdrop-blur-sm hover:border-purple-500/40 transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="group relative overflow-hidden rounded-lg border border-purple-500/20 bg-card/50 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 hover:scale-105 active:scale-105 hover:bg-white/5 active:bg-white/5"
             >
               <div className="aspect-video relative min-h-[120px] sm:min-h-0">
                 <Image
@@ -72,7 +71,7 @@ export function CollaborationsSection() {
                   alt={collab.name}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110 group-active:scale-110"
+                  className="object-cover transition-transform duration-300 group-hover:scale-110 group-active:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">

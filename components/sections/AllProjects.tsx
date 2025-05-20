@@ -41,7 +41,8 @@ export function AllProjects() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400"
         >
           All Projects
@@ -54,10 +55,10 @@ export function AllProjects() {
               key={project.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="group relative"
-              whileHover={{ scale: 1.05 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: index * 0.03 }}
+              className="group relative transition-all duration-300 hover:scale-105 active:scale-105 hover:bg-white/5 active:bg-white/5"
+              whileHover={undefined}
             >
               <div className="relative h-28 w-28 mx-auto">
                 {/* Gradient border */}
@@ -72,17 +73,17 @@ export function AllProjects() {
                     alt={project.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-110 group-active:scale-110"
+                    className="object-cover transition-transform duration-200 group-hover:scale-110 group-active:scale-110"
                     priority={index < 6}
                   />
                 </div>
 
                 {/* Hover overlay */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-active:opacity-100" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-active:opacity-100" />
               </div>
 
               {/* Name tooltip */}
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-300 group-hover:-translate-y-0 group-hover:opacity-100 group-active:-translate-y-0 group-active:opacity-100">
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-200 group-hover:-translate-y-0 group-hover:opacity-100 group-active:-translate-y-0 group-active:opacity-100">
                 <div className="rounded-lg bg-black/90 px-3 py-1 text-sm text-white backdrop-blur-sm">
                   {project.name}
                 </div>

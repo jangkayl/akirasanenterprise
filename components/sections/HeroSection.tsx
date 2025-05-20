@@ -60,7 +60,7 @@ export function HeroSection() {
                   <Users className="w-3 h-3 md:w-5 md:h-5 text-violet-400" />
                 </div>
                 <div>
-                  <p className="text-base md:text-2xl font-bold text-white">500+</p>
+                  <p className="text-base md:text-2xl font-bold text-white">50+</p>
                   <p className="text-xs md:text-sm text-white/60">Developers</p>
                 </div>
               </div>
@@ -71,7 +71,7 @@ export function HeroSection() {
                   <TrendingUp className="w-3 h-3 md:w-5 md:h-5 text-indigo-400" />
                 </div>
                 <div>
-                  <p className="text-base md:text-2xl font-bold text-white">100+</p>
+                  <p className="text-base md:text-2xl font-bold text-white">50+</p>
                   <p className="text-xs md:text-sm text-white/60">Designers</p>
                 </div>
               </div>
@@ -82,7 +82,7 @@ export function HeroSection() {
                   <Rocket className="w-3 h-3 md:w-5 md:h-5 text-fuchsia-400" />
                 </div>
                 <div>
-                  <p className="text-base md:text-2xl font-bold text-white">50+</p>
+                  <p className="text-base md:text-2xl font-bold text-white">500+</p>
                   <p className="text-xs md:text-sm text-white/60">Influencers</p>
                 </div>
               </div>
@@ -93,7 +93,7 @@ export function HeroSection() {
                   <Coins className="w-3 h-3 md:w-5 md:h-5 text-blue-400" />
                 </div>
                 <div>
-                  <p className="text-base md:text-2xl font-bold text-white">200+</p>
+                  <p className="text-base md:text-2xl font-bold text-white">500+</p>
                   <p className="text-xs md:text-sm text-white/60">Crypto Projects</p>
                 </div>
               </div>

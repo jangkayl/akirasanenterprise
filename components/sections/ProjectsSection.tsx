@@ -39,54 +39,57 @@ const projects = [
 export function ProjectsSection() {
   return (
     <section className="py-20 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-purple-900/10 to-background/50" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent" />
+      {/* Simplified background effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-purple-900/5 to-background/50" />
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500"
         >
           Featured Projects
         </motion.h2>
 
-        {/* Round Images Grid */}
+        {/* Optimized Images Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.05 }}
               className="group relative"
             >
               <div className="relative h-32 w-32 mx-auto">
-                {/* Gradient border */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 p-[2px]">
+                {/* Simplified gradient border */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/50 to-blue-500/50 p-[1px]">
                   <div className="absolute inset-0 rounded-full bg-black" />
                 </div>
                 
-                {/* Image */}
+                {/* Optimized Image */}
                 <div className="relative h-full w-full overflow-hidden rounded-full">
                   <Image
                     src={project.image}
                     alt={project.name}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    sizes="(max-width: 768px) 128px, 128px"
+                    loading={index < 4 ? "eager" : "lazy"}
+                    className="object-cover transition-transform duration-200 group-hover:scale-105"
+                    quality={75}
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                 </div>
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                {/* Simplified hover overlay */}
+                <div className="absolute inset-0 rounded-full bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
               </div>
 
-              {/* Name tooltip */}
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-300 group-hover:-translate-y-0 group-hover:opacity-100">
-                <div className="rounded-lg bg-black/90 px-3 py-1 text-sm text-white backdrop-blur-sm">
+              {/* Simplified tooltip */}
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-200 group-hover:-translate-y-0 group-hover:opacity-100">
+                <div className="rounded-lg bg-black/90 px-3 py-1 text-sm text-white">
                   {project.name}
                 </div>
               </div>

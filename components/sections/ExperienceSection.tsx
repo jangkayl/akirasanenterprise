@@ -67,7 +67,7 @@ export function ExperienceSection() {
             <ExperienceCard
               title="Digital Marketing Specialist"
               company="Pinksale Official"
-              period="2022 - Present"
+              period="2014 - Present"
               description="Leading digital marketing strategies for crypto projects, managing community growth, and implementing successful marketing campaigns."
               icon={<Rocket className="h-6 w-6" />}
               className="group transition-all duration-300 hover:scale-105 active:scale-105 hover:bg-white/5 active:bg-white/5"
@@ -75,7 +75,7 @@ export function ExperienceSection() {
             <ExperienceCard
               title="Community Manager"
               company="Crypto Projects"
-              period="2021 - 2022"
+              period="2019 - Present"
               description="Built and managed thriving communities for various crypto projects, ensuring engagement and growth."
               icon={<Users className="h-6 w-6" />}
               className="group transition-all duration-300 hover:scale-105 active:scale-105 hover:bg-white/5 active:bg-white/5"
@@ -83,7 +83,7 @@ export function ExperienceSection() {
             <ExperienceCard
               title="Marketing Consultant"
               company="Tech Startups"
-              period="2020 - 2021"
+              period="2014 - 2021"
               description="Provided strategic marketing consulting to tech startups, helping them establish their digital presence."
               icon={<TrendingUp className="h-6 w-6" />}
               className="group transition-all duration-300 hover:scale-105 active:scale-105 hover:bg-white/5 active:bg-white/5"
@@ -91,7 +91,7 @@ export function ExperienceSection() {
             <ExperienceCard
               title="Freelance Marketer"
               company="Various Clients"
-              period="2019 - 2020"
+              period="2014 - 2020"
               description="Worked with diverse clients to create and implement effective digital marketing strategies."
               icon={<Briefcase className="h-6 w-6" />}
               className="group transition-all duration-300 hover:scale-105 active:scale-105 hover:bg-white/5 active:bg-white/5"
