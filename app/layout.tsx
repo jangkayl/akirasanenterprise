@@ -11,14 +11,15 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/assets/logo.png",
-        type: "image/png",
+        url: "/assets/logo.ICO",
+        type: "image/x-icon",
       },
       {
-        url: "/assets/logo.ico",
-        type: "image/x-icon",
+        url: "/assets/logo.png",
+        type: "image/png",
       }
     ],
+    shortcut: "/assets/logo.ICO",
     apple: {
       url: "/assets/logo.png",
       type: "image/png",

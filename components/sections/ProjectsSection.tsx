@@ -39,14 +39,15 @@ const projects = [
 export function ProjectsSection() {
   return (
     <section className="py-20 relative overflow-hidden">
-      {/* Simplified background effects */}
+      {/* Simplified background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-purple-900/5 to-background/50" />
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500"
         >
           Featured Projects
@@ -57,34 +58,34 @@ export function ProjectsSection() {
           {projects.map((project, index) => (
             <motion.div
               key={project.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.05 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group relative"
             >
               <div className="relative h-32 w-32 mx-auto">
                 {/* Simplified gradient border */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/50 to-blue-500/50 p-[1px]">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/30 to-blue-500/30 p-[1px]">
                   <div className="absolute inset-0 rounded-full bg-black" />
                 </div>
                 
-                {/* Optimized Image */}
+                {/* Optimized Image with lazy loading */}
                 <div className="relative h-full w-full overflow-hidden rounded-full">
                   <Image
                     src={project.image}
                     alt={project.name}
                     fill
                     sizes="(max-width: 768px) 128px, 128px"
-                    loading={index < 4 ? "eager" : "lazy"}
-                    className="object-cover transition-transform duration-200 group-hover:scale-105"
+                    loading="lazy"
+                    fetchPriority={index < 2 ? "high" : "low"}
+                    className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
                     quality={75}
-                    style={{ width: 'auto', height: 'auto' }}
                   />
                 </div>
 
                 {/* Simplified hover overlay */}
-                <div className="absolute inset-0 rounded-full bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
               </div>
 
               {/* Simplified tooltip */}

@@ -110,7 +110,7 @@ export function HeroSection() {
               <CustomButton 
                 size="sm" 
                 icon={<ArrowRight className="w-5 h-5" />} 
-                className="w-full md:w-auto px-3 py-2 text-sm md:text-base md:px-4 md:py-2 transition-all duration-300 hover:bg-violet-500/20 active:bg-violet-500/20"
+                className="w-full md:w-auto max-w-xs px-3 py-2 text-sm md:text-base md:px-4 md:py-2 transition-all duration-300 hover:bg-violet-500/20 active:bg-violet-500/20"
                 onClick={() => scrollToSection('collaborations')}
               >
                 View Projects
