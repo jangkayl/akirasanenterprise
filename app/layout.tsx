@@ -1,30 +1,13 @@
+import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AkiraSan Enterprise",
   description: "Digital Marketing & Community Management Expert",
-  icons: {
-    icon: [
-      {
-        url: "/assets/logo.ICO",
-        type: "image/x-icon",
-      },
-      {
-        url: "/assets/logo.png",
-        type: "image/png",
-      }
-    ],
-    shortcut: "/assets/logo.ICO",
-    apple: {
-      url: "/assets/logo.png",
-      type: "image/png",
-    },
-  },
 };
 
 export default function RootLayout({
@@ -34,6 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/assets/logo.png" type="image/png" />
+        <link rel="shortcut icon" href="/assets/logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/assets/logo.png" type="image/png" />
+      </head>
       <body className={`${inter.className} min-h-screen bg-black`}>
         <ThemeProvider
           attribute="class"
@@ -42,7 +30,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-        {children}
+          {children}
         </ThemeProvider>
       </body>
     </html>
