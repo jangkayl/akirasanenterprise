@@ -7,25 +7,28 @@ interface CollaborationCardProps {
   className?: string;
 }
 
-export function CollaborationCard({ image, name, className = "" }: CollaborationCardProps) {
+export function CollaborationCard({
+  image,
+  name,
+  className = "",
+}: CollaborationCardProps) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      className={`group relative ${className}`}
-    >
+    <motion.div whileHover={{ scale: 1.05 }} className={`group relative ${className}`}>
       {/* Image container with gradient border */}
       <div className="relative h-32 w-32 overflow-hidden rounded-full">
         {/* Gradient border */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 p-[2px]">
           <div className="absolute inset-0 rounded-full bg-black" />
         </div>
-        
+
         {/* Image */}
         <div className="relative h-full w-full overflow-hidden rounded-full">
           <Image
             src={image}
             alt={name}
             fill
+            quality={75}
+            loading="lazy"
             className="object-cover transition-transform duration-300 group-hover:scale-110"
           />
         </div>
@@ -42,4 +45,4 @@ export function CollaborationCard({ image, name, className = "" }: Collaboration
       </div>
     </motion.div>
   );
-} 
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Send, ArrowRight } from "lucide-react";
+import { ArrowRight, Send } from "lucide-react";
 import Image from "next/image";
 
 export function ContactSection() {
@@ -10,12 +10,12 @@ export function ContactSection() {
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-purple-900/10 to-background/50" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent" />
-      
+
       {/* Animated gradient orbs */}
       <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob" />
       <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000" />
       <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,9 +28,10 @@ export function ContactSection() {
               Let's Connect
             </h2>
             <p className="text-sm md:text-lg text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto">
-              Join our Telegram channel for the latest updates, announcements, and exclusive content from Akirasan Enterprise
+              Join our Telegram channel for the latest updates, announcements, and
+              exclusive content from Akirasan Enterprise
             </p>
-            
+
             <motion.a
               href="https://t.me/akirasanenterprise"
               target="_blank"
@@ -55,9 +56,10 @@ export function ContactSection() {
                     src="/assets/logo.png"
                     alt="Akirasan Enterprise"
                     fill
+                    quality={75}
+                    loading="lazy"
                     sizes="(max-width: 768px) 48px, 64px"
                     className="object-contain"
-                    priority
                   />
                 </div>
                 <h1 className="text-xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400">
@@ -72,9 +74,10 @@ export function ContactSection() {
                     src="/assets/partnership1.png"
                     alt="Partnership 1"
                     fill
+                    quality={75}
+                    loading="lazy"
                     sizes="(max-width: 768px) 64px, 80px"
                     className="object-contain"
-                    priority
                   />
                 </div>
                 <div className="relative w-16 h-16 md:w-20 md:h-20">
@@ -82,9 +85,10 @@ export function ContactSection() {
                     src="/assets/partnership2.png"
                     alt="Partnership 2"
                     fill
+                    quality={75}
+                    loading="lazy"
                     sizes="(max-width: 768px) 64px, 80px"
                     className="object-contain"
-                    priority
                   />
                 </div>
               </div>
@@ -100,4 +104,3 @@ export function ContactSection() {
     </section>
   );
 }
-

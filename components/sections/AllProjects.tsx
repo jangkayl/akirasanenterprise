@@ -6,15 +6,15 @@ import Image from "next/image";
 // Generate projects array with 53 items
 const projects = Array.from({ length: 52 }, (_, i) => ({
   name: `Crypto Project ${i + 1}`,
-  image: `/assets/project${(i) + 1}.jpeg`,
+  image: `/assets/project${i + 1}.jpeg`,
   description: [
     "Marketing & Community Management",
     "Social Media Strategy",
     "Community Building",
     "Marketing Strategy",
     "Growth Hacking",
-    "Content Creation"
-  ][i % 6]
+    "Content Creation",
+  ][i % 6],
 }));
 
 export function AllProjects() {
@@ -23,7 +23,7 @@ export function AllProjects() {
       {/* Enhanced background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-purple-900/10 to-background/50" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent" />
-      
+
       {/* Animated gradient orbs */}
       <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob" />
       <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000" />
@@ -33,10 +33,10 @@ export function AllProjects() {
       <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-purple-900/20" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/30 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-blue-500/30 via-transparent to-transparent" />
-      
+
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]" />
-      
+
       <div className="max-w-5xl mx-auto px-4 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -65,7 +65,7 @@ export function AllProjects() {
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 p-[2px]">
                   <div className="absolute inset-0 rounded-full bg-black" />
                 </div>
-                
+
                 {/* Image */}
                 <div className="relative h-full w-full overflow-hidden rounded-full">
                   <Image
@@ -73,8 +73,10 @@ export function AllProjects() {
                     alt={project.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
+                    quality={75}
+                    loading="lazy"
                     className="object-cover transition-transform duration-200 group-hover:scale-110 group-active:scale-110"
-                    priority={index < 6}
+                    // priority={index < 6}
                   />
                 </div>
 
@@ -94,4 +96,4 @@ export function AllProjects() {
       </div>
     </section>
   );
-} 
+}

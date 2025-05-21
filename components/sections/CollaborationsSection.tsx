@@ -7,33 +7,33 @@ const collaborations = [
   {
     name: "Crypto Project 1",
     image: "/assets/project1.jpeg",
-    description: "Marketing & Community Management"
+    description: "Marketing & Community Management",
   },
   {
     name: "Crypto Project 2",
     image: "/assets/project2.jpeg",
-    description: "Social Media Strategy"
+    description: "Social Media Strategy",
   },
   {
     name: "Crypto Project 3",
     image: "/assets/project3.jpeg",
-    description: "Community Building"
+    description: "Community Building",
   },
   {
     name: "Crypto Project 4",
     image: "/assets/project4.jpeg",
-    description: "Marketing Strategy"
+    description: "Marketing Strategy",
   },
   {
     name: "Crypto Project 5",
     image: "/assets/project5.jpeg",
-    description: "Growth Hacking"
+    description: "Growth Hacking",
   },
   {
     name: "Crypto Project 6",
     image: "/assets/project6.jpeg",
-    description: "Content Creation"
-  }
+    description: "Content Creation",
+  },
 ];
 
 export function CollaborationsSection() {
@@ -42,7 +42,7 @@ export function CollaborationsSection() {
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-purple-900/10 to-background/50" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -70,6 +70,8 @@ export function CollaborationsSection() {
                   src={collab.image}
                   alt={collab.name}
                   fill
+                  quality={75}
+                  loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-110 group-active:scale-110"
                 />
@@ -87,4 +89,3 @@ export function CollaborationsSection() {
     </section>
   );
 }
-
