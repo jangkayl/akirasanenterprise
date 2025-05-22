@@ -1,13 +1,10 @@
-import Image from "next/image";
-import React from "react";
+"use client";
 
-interface ProjectLogoCarouselProps {
-  logos: { image: string; name: string }[];
-}
+import { Project } from "@/lib/utils";
+import { CldImage } from "next-cloudinary";
 
-export const ProjectLogoCarousel: React.FC<ProjectLogoCarouselProps> = ({ logos }) => {
-  // Only duplicate once instead of three times to reduce DOM elements
-  const displayLogos = [...logos, ...logos];
+export const ProjectLogoCarousel = ({ projects }: { projects: Project[] }) => {
+  const displayProjects = [...projects, ...projects];
 
   return (
     <div className="w-full overflow-hidden py-4 z-10 relative">
@@ -24,47 +21,27 @@ export const ProjectLogoCarousel: React.FC<ProjectLogoCarouselProps> = ({ logos 
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1e_1px,transparent_1px)] bg-[size:14px_24px]" />
 
       <div className="flex gap-6 md:gap-10 carousel-track relative">
-        {displayLogos.map((logo, idx) => (
+        {displayProjects.map((logo, idx) => (
           <div
             key={idx}
             className="flex-shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-full bg-black flex items-center justify-center transition-transform duration-200 hover:scale-[1.02] shadow-md"
           >
-            <Image
-              src={logo.image}
-              alt={logo.name}
+            <CldImage
+              src={logo.image || ""}
+              alt={logo.title}
               width={80}
               height={80}
               style={{ width: "100px", height: "auto" }}
               sizes="(max-width: 768px) 64px, 96px"
               className="rounded-full  object-contain"
               loading="lazy"
-              quality={75}
+              format="webp"
+              quality={50}
               fetchPriority={idx < 2 ? "high" : "low"}
             />
           </div>
         ))}
       </div>
-      <style jsx global>{`
-        .carousel-track {
-          display: flex;
-          animation: scroll 30s linear infinite;
-          width: fit-content;
-          will-change: transform;
-        }
-
-        .carousel-track:hover {
-          animation-play-state: paused;
-        }
-
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-50%));
-          }
-        }
-      `}</style>
     </div>
   );
 };

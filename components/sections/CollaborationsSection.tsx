@@ -1,42 +1,14 @@
 "use client";
 
+import { Project } from "@/lib/utils";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 
-const collaborations = [
-  {
-    name: "Crypto Project 1",
-    image: "/assets/project1.jpeg",
-    description: "Marketing & Community Management",
-  },
-  {
-    name: "Crypto Project 2",
-    image: "/assets/project2.jpeg",
-    description: "Social Media Strategy",
-  },
-  {
-    name: "Crypto Project 3",
-    image: "/assets/project3.jpeg",
-    description: "Community Building",
-  },
-  {
-    name: "Crypto Project 4",
-    image: "/assets/project4.jpeg",
-    description: "Marketing Strategy",
-  },
-  {
-    name: "Crypto Project 5",
-    image: "/assets/project5.jpeg",
-    description: "Growth Hacking",
-  },
-  {
-    name: "Crypto Project 6",
-    image: "/assets/project6.jpeg",
-    description: "Content Creation",
-  },
-];
-
-export function CollaborationsSection() {
+export function CollaborationsSection({
+  notableCollaborations,
+}: {
+  notableCollaborations: Project[];
+}) {
   return (
     <section id="collaborations" className="py-20 relative overflow-hidden">
       {/* Background effects */}
@@ -56,9 +28,9 @@ export function CollaborationsSection() {
 
         {/* Project Details Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {collaborations.map((collab, index) => (
+          {notableCollaborations.map((collab: Project, index: number) => (
             <motion.div
-              key={collab.name}
+              key={collab.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -66,18 +38,19 @@ export function CollaborationsSection() {
               className="group relative overflow-hidden rounded-lg border border-purple-500/20 bg-card/50 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300 hover:scale-105 active:scale-105 hover:bg-white/5 active:bg-white/5"
             >
               <div className="aspect-video relative min-h-[120px] sm:min-h-0">
-                <Image
-                  src={collab.image}
-                  alt={collab.name}
+                <CldImage
+                  src={collab.image || ""}
+                  alt={collab.title}
                   fill
-                  quality={75}
+                  quality={50}
                   loading="lazy"
+                  format="webp"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-110 group-active:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <h3 className="text-xl font-semibold mb-2">{collab.name}</h3>
+                  <h3 className="text-xl font-semibold mb-2">{collab.title}</h3>
                   <p className="text-sm text-white/80">{collab.description}</p>
                 </div>
               </div>

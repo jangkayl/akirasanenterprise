@@ -1,44 +1,60 @@
 "use server";
 
-import { eq } from "drizzle-orm";
+import { Post } from "@/lib/utils";
+import bcrypt from "bcryptjs";
+import { desc, eq } from "drizzle-orm";
 import { db } from "../db/drizzle";
-import { todo } from "../db/schema";
+import { login, post } from "../db/schema";
 
-// Cloudinary config
-const CLOUDINARY_UPLOAD_PRESET = "your_upload_preset";
-const CLOUDINARY_CLOUD_NAME = "your_cloud_name";
-
+// Posts
 export const getData = async () => {
-  return await db.select().from(todo);
+  return await db.select().from(post).orderBy(desc(post.id));
 };
 
-export const addTodo = async (text: string, imageUrl?: string) => {
-  await db.insert(todo).values({
-    text,
-    // If you add an image column to your schema, include imageUrl here
+export const addPost = async (
+  title: string,
+  description: string,
+  imageUrl?: string,
+  isPinned?: boolean
+) => {
+  await db.insert(post).values({
+    title,
+    description,
+    image: imageUrl,
+    isPinned,
   });
 };
 
-export const updateTodo = async (id: number, text: string, done: boolean) => {
-  await db.update(todo).set({ text, done }).where(eq(todo.id, id));
-};
-export const deleteTodo = async (id: number) => {
-  await db.delete(todo).where(eq(todo.id, id));
+export const updatePost = async (data: Post) => {
+  await db
+    .update(post)
+    .set({
+      title: data.title,
+      description: data.description,
+      image: data.image,
+      isPinned: data.isPinned,
+    })
+    .where(eq(post.id, data.id));
 };
 
-// Cloudinary upload helper
-export const uploadToCloudinary = async (file: File) => {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+export const deletePost = async (id: number) => {
+  await db.delete(post).where(eq(post.id, id));
+};
 
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
-    {
-      method: "POST",
-      body: formData,
-    }
-  );
-  const data = await res.json();
-  return data.secure_url as string;
+// Login
+export const addLogin = async (email: string, password: string) => {
+  const hashedPassword = await bcrypt.hash(password, 10);
+  await db.insert(login).values({ email, password: hashedPassword });
+};
+
+export const getLoginByEmail = async (email: string) => {
+  const result = await db.select().from(login).where(eq(login.email, email));
+  return result[0] || null;
+};
+
+export const verifyLogin = async (email: string, password: string) => {
+  const user = await getLoginByEmail(email);
+  if (!user) return null;
+  const isMatch = await bcrypt.compare(password, user.password);
+  return isMatch ? user : null;
 };

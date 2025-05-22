@@ -48,7 +48,7 @@
 @tailwind utilities;
 
 @layer base {
-:root {
+  :root {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
 
@@ -78,9 +78,9 @@
     --ring: 270 100% 50%;
 
     --radius: 0.5rem;
-}
+  }
 
-.dark {
+  .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
@@ -146,4 +146,23 @@
 
 .animate-blob {
   animation: blob 7s infinite;
+}
+
+/* Carousel */
+.carousel-track {
+  display: flex;
+  animation: scroll 15s linear infinite;
+  width: fit-content;
+  will-change: transform;
+}
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
 }

@@ -1,11 +1,14 @@
 "use client";
 
+import { Project } from "@/lib/utils";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { CldImage } from "next-cloudinary";
+import React, { useState } from "react";
 
-// Generate projects array with 53 items
-const projects = Array.from({ length: 52 }, (_, i) => ({
-  name: `Crypto Project ${i + 1}`,
+const PROJECTS_PER_PAGE = 54;
+
+const demoProjects = Array.from({ length: 52 }, (_, i) => ({
+  title: `Crypto Project ${i + 1}`,
   image: `/assets/project${i + 1}.jpeg`,
   description: [
     "Marketing & Community Management",
@@ -17,7 +20,17 @@ const projects = Array.from({ length: 52 }, (_, i) => ({
   ][i % 6],
 }));
 
-export function AllProjects() {
+export function AllProjects({ projects }: { projects: Project[] }) {
+  const allProjects = [...projects, ...demoProjects];
+
+  const [page, setPage] = useState(1);
+
+  const totalPages = Math.ceil(allProjects.length / PROJECTS_PER_PAGE);
+  const paginatedProjects = allProjects.slice(
+    (page - 1) * PROJECTS_PER_PAGE,
+    page * PROJECTS_PER_PAGE
+  );
+
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Enhanced background effects */}
@@ -50,9 +63,9 @@ export function AllProjects() {
 
         {/* Round Images Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {projects.map((project, index) => (
+          {paginatedProjects.map((project, index) => (
             <motion.div
-              key={project.name}
+              key={project.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -68,16 +81,25 @@ export function AllProjects() {
 
                 {/* Image */}
                 <div className="relative h-full w-full overflow-hidden rounded-full">
-                  <Image
-                    src={project.image}
-                    alt={project.name}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
-                    quality={75}
-                    loading="lazy"
-                    className="object-cover transition-transform duration-200 group-hover:scale-110 group-active:scale-110"
-                    // priority={index < 6}
-                  />
+                  {project.image?.includes("/assets/") ? (
+                    <img
+                      src={project.image || ""}
+                      alt={project.title}
+                      className="object-cover w-full h-full transition-transform duration-200 group-hover:scale-110 group-active:scale-110"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <CldImage
+                      src={project.image || ""}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
+                      quality="auto:eco"
+                      loading="lazy"
+                      format="auto"
+                      className="object-cover transition-transform duration-200 group-hover:scale-110 group-active:scale-110"
+                    />
+                  )}
                 </div>
 
                 {/* Hover overlay */}
@@ -87,11 +109,104 @@ export function AllProjects() {
               {/* Name tooltip */}
               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-200 group-hover:-translate-y-0 group-hover:opacity-100 group-active:-translate-y-0 group-active:opacity-100">
                 <div className="rounded-lg bg-black/90 px-3 py-1 text-sm text-white backdrop-blur-sm">
-                  {project.name}
+                  {project.title}
                 </div>
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex flex-col items-center gap-4 mt-12">
+          <div className="flex items-center gap-2">
+            {/* Previous Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className={`p-3 rounded-lg ${
+                page === 1
+                  ? "bg-gray-800 text-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
+              } transition-all shadow-lg flex items-center gap-2`}
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+              <span className="hidden sm:inline">Previous</span>
+            </motion.button>
+
+            {/* Page Numbers with Dots */}
+            <div className="flex items-center mx-2">
+              {Array.from({ length: totalPages }).map((_, idx) => (
+                <React.Fragment key={idx}>
+                  {idx > 0 && (
+                    <div
+                      className={`w-2 h-2 rounded-full mx-1 ${
+                        Math.abs(page - (idx + 1)) <= 2
+                          ? "bg-purple-500/30"
+                          : "bg-gray-700/30"
+                      }`}
+                    />
+                  )}
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setPage(idx + 1)}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-medium transition-all ${
+                      page === idx + 1
+                        ? "bg-gradient-to-br from-purple-500 to-blue-500 text-white shadow-lg shadow-purple-500/30"
+                        : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
+                    }`}
+                  >
+                    {idx + 1}
+                  </motion.button>
+                </React.Fragment>
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              className={`p-3 rounded-lg ${
+                page === totalPages
+                  ? "bg-gray-800 text-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
+              } transition-all shadow-lg flex items-center gap-2`}
+            >
+              <span className="hidden sm:inline">Next</span>
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </motion.button>
+          </div>
+
+          {/* Page Indicator */}
+          <div className="text-sm text-purple-300 font-medium flex items-center gap-2">
+            <span className="text-white">{page}</span>
+            <span className="text-gray-500">/</span>
+            <span>{totalPages}</span>
+            <span className="text-gray-500 ml-2">
+              ({(page - 1) * PROJECTS_PER_PAGE + 1}-
+              {Math.min(page * PROJECTS_PER_PAGE, projects.length)} of {projects.length})
+            </span>
+          </div>
         </div>
       </div>
     </section>
