@@ -34,9 +34,9 @@ export const ProjectLogoCarousel = ({ projects }: { projects: Project[] }) => {
               style={{ width: "100px", height: "auto" }}
               sizes="(max-width: 768px) 64px, 96px"
               className="rounded-full  object-contain"
-              loading="lazy"
               format="webp"
-              quality={50}
+              quality={40}
+              loading="lazy"
               fetchPriority={idx < 2 ? "high" : "low"}
             />
           </div>

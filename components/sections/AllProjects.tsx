@@ -94,9 +94,9 @@ export function AllProjects({ projects }: { projects: Project[] }) {
                       alt={project.title}
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
-                      quality="auto:eco"
+                      format="webp"
+                      quality={40}
                       loading="lazy"
-                      format="auto"
                       className="object-cover transition-transform duration-200 group-hover:scale-110 group-active:scale-110"
                     />
                   )}

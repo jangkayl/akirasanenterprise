@@ -498,9 +498,9 @@ export default function AdminDashboard({ initialPosts }: { initialPosts: Post[] 
                             crop="fill"
                             format="webp"
                             quality={20}
+                            loading="lazy"
                             alt="Post image"
                             className="object-cover w-full h-full"
-                            loading="lazy"
                           />
                         </div>
                       )}
