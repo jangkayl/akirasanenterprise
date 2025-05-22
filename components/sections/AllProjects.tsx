@@ -117,7 +117,7 @@ export function AllProjects({ projects }: { projects: Project[] }) {
         </div>
 
         {/* Pagination Controls */}
-        <div className="flex flex-col items-center gap-4 mt-12">
+        <div className="flex flex-col items-center gap-4 mt-15">
           <div className="flex items-center gap-2">
             {/* Previous Button */}
             <motion.button
