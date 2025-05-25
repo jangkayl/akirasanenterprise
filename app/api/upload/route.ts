@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import formidable, { File } from "formidable";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 import { Readable } from "stream";
 
@@ -10,10 +11,9 @@ export const config = {
 };
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
-  api_key: process.env.CLOUDINARY_API_KEY!,
-  api_secret: process.env.CLOUDINARY_API_SECRET!,
-  cloud_preset: process.env.CLOUDINARY_CLOUD_PRESET!,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 export async function POST(req: NextRequest) {
@@ -94,5 +94,9 @@ export async function POST(req: NextRequest) {
         );
       }
     });
+
+    revalidateTag("projects");
+    revalidatePath("/");
+    revalidatePath("/akirasanadmin");
   });
 }

@@ -3,14 +3,14 @@
 import { Post } from "@/lib/utils";
 import bcrypt from "bcryptjs";
 import { desc, eq } from "drizzle-orm";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag, unstable_cache } from "next/cache";
 import { db } from "../db/drizzle";
 import { login, post } from "../db/schema";
 
 // Posts
-export const getData = async () => {
+export const getData = unstable_cache(async () => {
   return await db.select().from(post).orderBy(desc(post.id));
-};
+}, ["projects"]);
 
 export const addPost = async (
   title: string,
@@ -27,6 +27,7 @@ export const addPost = async (
 
   revalidateTag("projects");
   revalidatePath("/");
+  revalidatePath("/akirasanadmin");
 };
 
 export const updatePost = async (data: Post) => {
@@ -39,6 +40,10 @@ export const updatePost = async (data: Post) => {
       isPinned: data.isPinned,
     })
     .where(eq(post.id, data.id));
+
+  revalidateTag("projects");
+  revalidatePath("/");
+  revalidatePath("/akirasanadmin");
 };
 
 export const deletePost = async (id: number) => {
@@ -46,6 +51,7 @@ export const deletePost = async (id: number) => {
 
   revalidateTag("projects");
   revalidatePath("/");
+  revalidatePath("/akirasanadmin");
 };
 
 // Login
