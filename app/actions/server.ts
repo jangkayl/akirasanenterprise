@@ -3,6 +3,7 @@
 import { Post } from "@/lib/utils";
 import bcrypt from "bcryptjs";
 import { desc, eq } from "drizzle-orm";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { db } from "../db/drizzle";
 import { login, post } from "../db/schema";
 
@@ -23,6 +24,9 @@ export const addPost = async (
     image: imageUrl,
     isPinned,
   });
+
+  revalidateTag("projects");
+  revalidatePath("/");
 };
 
 export const updatePost = async (data: Post) => {
@@ -39,6 +43,9 @@ export const updatePost = async (data: Post) => {
 
 export const deletePost = async (id: number) => {
   await db.delete(post).where(eq(post.id, id));
+
+  revalidateTag("projects");
+  revalidatePath("/");
 };
 
 // Login

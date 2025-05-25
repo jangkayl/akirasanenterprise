@@ -4,9 +4,6 @@ import { CldImage } from "next-cloudinary";
 import { useState, useTransition } from "react";
 import { addPost, deletePost, getData, updatePost } from "../actions/server";
 
-const CLOUDINARY_UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!;
-const CLOUDINARY_CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
-
 type Post = {
   id: number;
   title: string;
@@ -69,20 +66,21 @@ export default function AdminDashboard({ initialPosts }: { initialPosts: Post[] 
   const handleUpload = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-    formData.append("folder", "AkirasanPosts");
 
     setUploading(true);
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
     setUploading(false);
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.error || "Upload failed");
+    }
+
     const data = await res.json();
-    return data.public_id as string;
+    return data.secure_url as string;
   };
 
   const handleAdd = async () => {

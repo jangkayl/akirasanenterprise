@@ -72,7 +72,7 @@ export function HeroSection() {
                   <Users className="w-3 h-3 md:w-5 md:h-5 text-violet-400" />
                 </div>
                 <div>
-                  <p className="text-base md:text-2xl font-bold text-white">50+</p>
+                  <p className="text-base md:text-2xl font-bold text-white">30+</p>
                   <p className="text-xs md:text-sm text-white/60">Developers</p>
                 </div>
               </div>
