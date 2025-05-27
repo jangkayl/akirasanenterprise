@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Send } from "lucide-react";
+import { ArrowRight, Mail, Send } from "lucide-react";
 import Image from "next/image";
 
 export function ContactSection() {
@@ -32,18 +32,35 @@ export function ContactSection() {
               exclusive content from Akirasan Enterprise
             </p>
 
-            <motion.a
-              href="https://t.me/akirasanenterprise"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm md:text-base font-medium hover:from-purple-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 group"
-            >
-              <Send className="w-4 h-4 md:w-5 md:h-5" />
-              Join Telegram Channel
-              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </motion.a>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+              {/* Contact Me Button */}
+              <motion.a
+                href="https://t.me/akirasanenterprise"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center justify-between gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm md:text-base font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-blue-500/25 group w-full md:w-auto"
+              >
+                <Mail className="w-4 h-4 md:w-5 md:h-5" />
+                Contact Me
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </motion.a>
+
+              {/* Telegram Channel Button */}
+              <motion.a
+                href="https://t.me/akirasancalls"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center justify-between gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm md:text-base font-medium hover:from-purple-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 group w-full md:w-auto"
+              >
+                <Send className="w-4 h-4 md:w-5 md:h-5" />
+                Join Telegram Channel
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </motion.a>
+            </div>
           </div>
 
           {/* Footer Section */}
