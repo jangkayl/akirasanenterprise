@@ -4,11 +4,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 import { Readable } from "stream";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// REMOVED: export const config (Not used in App Router)
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -17,16 +13,17 @@ cloudinary.config({
 });
 
 export async function POST(req: NextRequest) {
-  // Convert the web ReadableStream to a Node.js Readable
+  // 1. Convert Web Stream to Node Buffer
   const buffers: Buffer[] = [];
-  // Convert the web ReadableStream to a Buffer
   const webStream = req.body as ReadableStream<Uint8Array> | null;
+
   if (!webStream) {
     return new Response(JSON.stringify({ error: "No request body" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
     });
   }
+
   const reader = webStream.getReader();
   let result;
   while (!(result = await reader.read()).done) {
@@ -34,7 +31,7 @@ export async function POST(req: NextRequest) {
   }
   const buffer = Buffer.concat(buffers);
 
-  // formidable expects a Node.js IncomingMessage, so we need to fake it
+  // 2. Mock Node.js Request for Formidable
   const fakeReq: any = new Readable();
   fakeReq.push(buffer);
   fakeReq.push(null);
@@ -78,6 +75,13 @@ export async function POST(req: NextRequest) {
           format: "webp",
           folder: "AkirasanPosts",
         });
+
+        // --- FIX: Revalidate INSIDE the success block ---
+        // Added "max" as the second argument to fix the TS error
+        revalidateTag("projects", "max");
+        revalidatePath("/");
+        revalidatePath("/akirasanadmin");
+
         resolve(
           new Response(JSON.stringify(result), {
             status: 200,
@@ -94,9 +98,5 @@ export async function POST(req: NextRequest) {
         );
       }
     });
-
-    revalidateTag("projects");
-    revalidatePath("/");
-    revalidatePath("/akirasanadmin");
   });
 }

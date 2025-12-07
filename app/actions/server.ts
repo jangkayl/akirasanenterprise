@@ -3,14 +3,18 @@
 import { Post } from "@/lib/utils";
 import bcrypt from "bcryptjs";
 import { desc, eq } from "drizzle-orm";
-import { revalidatePath, revalidateTag, unstable_cache } from "next/cache";
+import { revalidatePath, unstable_cache, updateTag } from "next/cache";
 import { db } from "../db/drizzle";
 import { login, post } from "../db/schema";
 
 // Posts
-export const getData = unstable_cache(async () => {
-  return await db.select().from(post).orderBy(desc(post.id));
-}, ["projects"]);
+export const getData = unstable_cache(
+  async () => {
+    return await db.select().from(post).orderBy(desc(post.id));
+  },
+  ["all-projects-key"],
+  { tags: ["projects"] }
+);
 
 export const addPost = async (
   title: string,
@@ -25,7 +29,8 @@ export const addPost = async (
     isPinned,
   });
 
-  revalidateTag("projects");
+  // FIXED: Using updateTag for immediate consistency
+  updateTag("projects");
   revalidatePath("/");
   revalidatePath("/akirasanadmin");
 };
@@ -41,7 +46,8 @@ export const updatePost = async (data: Post) => {
     })
     .where(eq(post.id, data.id));
 
-  revalidateTag("projects");
+  // FIXED
+  updateTag("projects");
   revalidatePath("/");
   revalidatePath("/akirasanadmin");
 };
@@ -49,7 +55,8 @@ export const updatePost = async (data: Post) => {
 export const deletePost = async (id: number) => {
   await db.delete(post).where(eq(post.id, id));
 
-  revalidateTag("projects");
+  // FIXED
+  updateTag("projects");
   revalidatePath("/");
   revalidatePath("/akirasanadmin");
 };
